@@ -52,12 +52,12 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
                 </li>
               </ul>
 
-              <a
-                href="contact.php"
+              <RouterLink
+                :to="{ path: '/', hash: '#kontak' }"
                 class="mt-10 py-4 rounded-xl text-center font-semibold bg-slate-700 hover:bg-concern-primary transition"
               >
                 Pilih Paket Basic
-              </a>
+              </RouterLink>
             </div>
 
             <!-- BUSINESS (HIGHLIGHTED) -->
@@ -97,12 +97,12 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
                 <li class="flex gap-3"><span class="text-concern-accent">✓</span> ±14 hari</li>
               </ul>
 
-              <a
-                href="contact.php"
+              <RouterLink
+                :to="{ path: '/', hash: '#kontak' }"
                 class="mt-10 py-4 rounded-xl text-center font-semibold bg-concern-accent hover:bg-cyan-500 text-slate-900 transition"
               >
                 Pilih Paket Business
-              </a>
+              </RouterLink>
             </div>
 
             <!-- SYSTEM STARTER -->
@@ -138,12 +138,12 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
                 <li class="flex gap-3"><span class="text-purple-400">✓</span> 3–6 minggu</li>
               </ul>
 
-              <a
-                href="contact.php"
+              <RouterLink
+                :to="{ path: '/', hash: '#kontak' }"
                 class="mt-10 py-4 rounded-xl text-center font-semibold bg-slate-700 hover:bg-purple-600 transition"
               >
                 Konsultasi System
-              </a>
+              </RouterLink>
             </div>
           </div>
 
@@ -191,12 +191,12 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
                   </li>
                 </ul>
 
-                <a
-                  href="contact.php"
+                <RouterLink
+                  :to="{ path: '/', hash: '#kontak' }"
                   class="mt-8 block text-center py-3 rounded-xl bg-slate-700 hover:bg-concern-accent hover:text-slate-900 transition font-semibold"
                 >
                   Pesan Design
-                </a>
+                </RouterLink>
               </div>
 
               <!-- FRONTEND -->
@@ -233,12 +233,12 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
                   </li>
                 </ul>
 
-                <a
-                  href="contact.php"
+                <RouterLink
+                  :to="{ path: '/', hash: '#kontak' }"
                   class="mt-8 block text-center py-3 rounded-xl bg-slate-700 hover:bg-concern-primary transition font-semibold"
                 >
                   Pesan Frontend
-                </a>
+                </RouterLink>
               </div>
 
               <!-- BACKEND -->
@@ -279,12 +279,12 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
                   </li>
                 </ul>
 
-                <a
-                  href="contact.php"
+                <RouterLink
+                  :to="{ path: '/', hash: '#kontak' }"
                   class="mt-8 block text-center py-3 rounded-xl bg-slate-700 hover:bg-purple-600 transition font-semibold"
                 >
                   Pesan Backend
-                </a>
+                </RouterLink>
               </div>
             </div>
           </div>
@@ -294,8 +294,8 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
             <p class="text-2xl font-semibold text-slate-200 mb-8">
               Siap mulai project? Mari diskusikan kebutuhan Anda.
             </p>
-            <a
-              href="contact.php"
+            <RouterLink
+              :to="{ path: '/', hash: '#kontak' }"
               class="inline-flex items-center px-12 py-6 bg-gradient-to-r from-concern-accent to-cyan-500 hover:from-cyan-500 hover:to-concern-accent rounded-2xl font-bold text-slate-900 text-2xl shadow-2xl shadow-cyan-900/50 transition-all duration-300 transform hover:scale-105"
             >
               Konsultasi Gratis Sekarang
@@ -307,7 +307,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
                   d="M9 5l7 7-7 7"
                 />
               </svg>
-            </a>
+            </RouterLink>
           </div>
         </div>
       </section>
