@@ -1,1 +1,28 @@
 @import 'tailwindcss';
+
+@theme {
+  /* --- Dark Mode Configuration --- */
+  /* Di v4, darkMode 'class' adalah bawaan jika kamu menggunakan variabel di bawah ini */
+  --variant-dark: .dark &;
+
+  /* --- Font Family --- */
+  --font-sans: 'Inter', 'system-ui', 'sans-serif';
+  --font-display: 'Manrope', 'sans-serif';
+
+  /* --- Custom Colors --- */
+  /* Kamu bisa mendefinisikan warna baru atau menimpa yang sudah ada */
+  --color-concern-primary: #6366f1;
+  --color-concern-accent: #06b6d4;
+  --color-concern-dark: #0f172a;
+  --color-concern-darker: #020617;
+}
+
+/* Base style tambahan jika diperlukan */
+@layer base {
+  html {
+    @apply antialiased text-slate-900 bg-white;
+  }
+  html.dark {
+    @apply text-slate-50 bg-concern-darker;
+  }
+}
