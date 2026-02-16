@@ -10,12 +10,32 @@
 
       <!-- Desktop Menu -->
       <div class="hidden md:flex items-center gap-8 font-medium">
-        <a href="#about" class="hover:text-concern-accent transition">About</a>
-        <a href="#services" class="hover:text-concern-accent transition">Services</a>
-        <a href="#techstack" class="hover:text-concern-accent transition">Stack</a>
-        <a href="#news" class="hover:text-concern-accent transition">News</a>
-        <a href="#portfolio" class="hover:text-concern-accent transition">Portfolio</a>
-        <a href="#kontak" class="hover:text-concern-accent transition">Contact</a>
+        <RouterLink :to="{ path: '/', hash: '#about' }" class="hover:text-concern-accent transition"
+          >About</RouterLink
+        >
+        <RouterLink
+          :to="{ path: '/', hash: '#services' }"
+          class="hover:text-concern-accent transition"
+          >Services</RouterLink
+        >
+        <RouterLink
+          :to="{ path: '/', hash: '#techstack' }"
+          class="hover:text-concern-accent transition"
+          >Stack</RouterLink
+        >
+        <RouterLink :to="{ path: '/', hash: '#news' }" class="hover:text-concern-accent transition"
+          >News</RouterLink
+        >
+        <RouterLink
+          :to="{ path: '/', hash: '#portfolio' }"
+          class="hover:text-concern-accent transition"
+          >Portfolio</RouterLink
+        >
+        <RouterLink
+          :to="{ path: '/', hash: '#kontak' }"
+          class="hover:text-concern-accent transition"
+          >Contact</RouterLink
+        >
       </div>
 
       <!-- Right Side -->
@@ -51,12 +71,36 @@
       id="mobileMenu"
       class="hidden md:hidden bg-concern-darker border-t border-slate-800 px-6 py-6 space-y-4"
     >
-      <a href="#about" class="block hover:text-concern-accent transition">About</a>
-      <a href="#services" class="block hover:text-concern-accent transition">Services</a>
-      <a href="#techstack" class="block hover:text-concern-accent transition">Stack</a>
-      <a href="#news" class="block hover:text-concern-accent transition">News</a>
-      <a href="#portfolio" class="block hover:text-concern-accent transition">Portfolio</a>
-      <a href="#kontak" class="block hover:text-concern-accent transition">Contact</a>
+      <RouterLink
+        :to="{ path: '/', hash: '#about' }"
+        class="block hover:text-concern-accent transition"
+        >About</RouterLink
+      >
+      <RouterLink
+        :to="{ path: '/', hash: '#services' }"
+        class="block hover:text-concern-accent transition"
+        >Services</RouterLink
+      >
+      <RouterLink
+        :to="{ path: '/', hash: '#techstack' }"
+        class="block hover:text-concern-accent transition"
+        >Stack</RouterLink
+      >
+      <RouterLink
+        :to="{ path: '/', hash: '#news' }"
+        class="block hover:text-concern-accent transition"
+        >News</RouterLink
+      >
+      <RouterLink
+        :to="{ path: '/', hash: '#portfolio' }"
+        class="block hover:text-concern-accent transition"
+        >Portfolio</RouterLink
+      >
+      <RouterLink
+        :to="{ path: '/', hash: '#kontak' }"
+        class="block hover:text-concern-accent transition"
+        >Contact</RouterLink
+      >
     </div>
   </header>
 </template>
