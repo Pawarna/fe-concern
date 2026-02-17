@@ -26,3 +26,60 @@
     @apply text-slate-50 bg-concern-darker;
   }
 }
+
+/* --- KONFIGURASI EDITOR TIPTAP (Masuk ke layer components) --- */
+@layer components {
+  /* Reset Placeholder agar warnanya pas */
+  .ProseMirror p.is-editor-empty:first-child::before {
+    @apply text-zinc-500 float-left h-0 pointer-events-none;
+    content: attr(data-placeholder);
+  }
+
+  /* Style Heading (Agar H1, H2, H3 punya ukuran yang benar) */
+  .ProseMirror h1 {
+    @apply text-4xl font-extrabold mt-8 mb-4 text-white leading-tight;
+  }
+
+  .ProseMirror h2 {
+    @apply text-2xl font-bold mt-6 mb-3 text-zinc-200;
+  }
+
+  .ProseMirror h3 {
+    @apply text-xl font-semibold mt-4 mb-2 text-zinc-300;
+  }
+
+  /* Style List (Agar Bullet & Numbering muncul) */
+  .ProseMirror ul {
+    @apply list-disc list-outside ml-6 my-4;
+  }
+
+  .ProseMirror ol {
+    @apply list-decimal list-outside ml-6 my-4;
+  }
+
+  /* Style Link */
+  .ProseMirror a {
+    @apply text-blue-500 underline cursor-pointer hover:text-blue-400;
+  }
+
+  /* Style Blockquote */
+  .ProseMirror blockquote {
+    @apply border-l-4 border-zinc-600 pl-4 italic text-zinc-400 my-4;
+  }
+
+  /* Style Image (Agar rounded & ada margin) */
+  .ProseMirror img {
+    @apply rounded-xl border border-zinc-700 my-6;
+  }
+
+  /* Helper untuk Image Resizer Align */
+  .image-resizer {
+    display: flex;
+  }
+  .ProseMirror[style*='text-align: center'] .image-resizer {
+    justify-content: center;
+  }
+  .ProseMirror[style*='text-align: right'] .image-resizer {
+    justify-content: flex-end;
+  }
+}

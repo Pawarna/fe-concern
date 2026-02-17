@@ -1,13 +1,90 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // Public
     { path: '/', name: 'home', component: () => import('@/views/home/HomeView.vue') },
+    {
+      path: '/news/:slug',
+      name: 'public-artikel-detail',
+      component: () => import('@/views/public/DetailArtikelView.vue'),
+    },
+    {
+      path: '/category/:slug',
+      name: 'public-category',
+      component: () => import('@/views/public/CategoryView.vue'),
+    },
     {
       path: '/services',
       name: 'services',
       component: () => import('@/views/detail_service/DetailService.vue'),
+    },
+    // Auth
+    {
+      path: '/auth',
+      component: () => import('@/layouts/AuthLayout.vue'),
+      children: [
+        {
+          path: 'login',
+          name: 'login',
+          component: () => import('@/views/auth/LoginView.vue'),
+          meta: { title: 'Login' },
+        },
+      ],
+    },
+    // Admin
+    {
+      path: '/admin',
+      component: () => import('@/layouts/AdminLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: 'dashboard',
+          name: 'admin-dashboard',
+          component: () => import('@/views/admin/DashboardView.vue'),
+          meta: { title: 'Dashboard' },
+        },
+        {
+          path: 'artikels',
+          name: 'admin-artikels',
+          component: () => import('@/views/admin/artikel/Index.vue'),
+          meta: { title: 'Daftar Artikel', requiresAuth: true },
+        },
+        {
+          path: 'artikels/create',
+          name: 'create-artikel',
+          component: () => import('@/views/admin/artikel/CreateArtikelView.vue'),
+          meta: { title: 'Buat Artikel Baru', requiresAuth: true },
+        },
+        {
+          path: 'artikels/edit/:id',
+          name: 'edit-artikel',
+          component: () => import('@/views/admin/artikel/EditArtikelView.vue'),
+          meta: { title: 'Update Artikel', requiresAuth: true },
+        },
+        {
+          path: 'categories',
+          name: 'admin-categories',
+          component: () => import('@/views/admin/CategoryView.vue'),
+          meta: { title: 'Daftar Kategori', requiresAuth: true },
+        },
+      ],
+    },
+
+    {
+      path: '/maintenance',
+      name: 'maintenance',
+      component: () => import('@/views/error/MaintenanceView.vue'),
+    },
+
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/views/error/NotFoundView.vue'),
+      meta: { title: 'Not Found' },
     },
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -17,6 +94,29 @@ const router = createRouter({
     }
     return { top: 0 }
   },
+})
+
+const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true'
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('token')
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
+  if (isMaintenanceMode && to.name !== 'maintenance') {
+    next({ name: 'maintenance' })
+  }
+
+  if (requiresAuth && !isAuthenticated) {
+    next({ name: 'login' })
+  } else if (to.name === 'login' && isAuthenticated) {
+    next({ name: 'admin-dashboard' })
+  } else {
+    next()
+  }
+})
+
+router.afterEach((to) => {
+  document.title = to.meta.title ? `${to.meta.title}` : 'Concern.dev'
+  AOS.refresh()
 })
 
 export default router
