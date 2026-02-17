@@ -68,6 +68,47 @@ const alert = useAlertStore()
       </div>
     </div>
   </Transition>
+
+  <Transition name="fade">
+    <div v-if="alert.showPrompt" class="fixed inset-0 z-[110] flex items-center justify-center p-4">
+      <div
+        class="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        @click="alert.showPrompt = false"
+      ></div>
+
+      <div
+        class="relative bg-[#18181b] border border-zinc-800 rounded-2xl w-full max-w-md p-6 shadow-2xl"
+      >
+        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+          <Icon icon="lucide:link" class="w-5 h-5 text-blue-500" />
+          {{ alert.title }}
+        </h3>
+
+        <input
+          v-model="alert.promptValue"
+          type="text"
+          placeholder="https://..."
+          class="w-full bg-[#09090b] border border-zinc-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-600 transition mb-6"
+          @keyup.enter="alert.executePrompt"
+        />
+
+        <div class="flex gap-3 justify-end">
+          <button
+            @click="alert.showPrompt = false"
+            class="px-4 py-2 text-zinc-400 hover:text-white transition text-sm"
+          >
+            Batal
+          </button>
+          <button
+            @click="alert.executePrompt"
+            class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold transition text-sm"
+          >
+            Pasang Link
+          </button>
+        </div>
+      </div>
+    </div>
+  </Transition>
 </template>
 
 <style scoped>

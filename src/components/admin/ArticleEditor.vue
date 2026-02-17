@@ -17,6 +17,9 @@ import { api } from '@/api'
 
 import ImageResizeComponent from './tiptap/ImageResizeComponent.vue'
 import ImageCropperModal from './ImageCropperModal.vue'
+import { useAlertStore } from '@/stores/alert'
+
+const alertStore = useAlertStore()
 
 const props = defineProps<{ modelValue: any }>()
 const emit = defineEmits(['update:modelValue'])
@@ -118,14 +121,17 @@ const handleCropComplete = async (croppedFile: File) => {
 }
 
 const setLink = () => {
-  const previousUrl = editor.value?.getAttributes('link').href
-  const url = window.prompt('URL:', previousUrl)
-  if (url === null) return
-  if (url === '') {
-    editor.value?.chain().focus().extendMarkRange('link').unsetLink().run()
-    return
-  }
-  editor.value?.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
+  const previousUrl = editor.value?.getAttributes('link').href || ''
+  alertStore.prompt('Masukkan URL Link', previousUrl, (url) => {
+    if (url === '') {
+      editor.value?.chain().focus().extendMarkRange('link').unsetLink().run()
+      return
+    }
+    editor.value?.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
+    alertStore.toast('Link berhasil dipasang')
+
+  })
+  
 }
 </script>
 

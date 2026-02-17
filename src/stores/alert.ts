@@ -7,6 +7,9 @@ interface AlertState {
   message: string
   confirmAction: (() => void) | null
   showConfirm: boolean
+  showPrompt: boolean
+  promptValue: string
+  onPromptConfirm: ((value: string) => void) | null
 }
 
 export const useAlertStore = defineStore('alert', {
@@ -17,6 +20,9 @@ export const useAlertStore = defineStore('alert', {
     message: '',
     confirmAction: null,
     showConfirm: false,
+    showPrompt: false,
+    promptValue: '',
+    onPromptConfirm: null,
   }),
   actions: {
     // Toast sederhana (Auto-hide)
@@ -49,6 +55,18 @@ export const useAlertStore = defineStore('alert', {
       if (this.confirmAction) this.confirmAction()
       this.showConfirm = false
       this.confirmAction = null
+    },
+
+    prompt(title: string, defaultValue: string = '', onConfirm: (value: string) => void) {
+      this.title = title
+      this.promptValue = defaultValue
+      this.onPromptConfirm = onConfirm
+      this.showPrompt = true
+    },
+
+    executePrompt() {
+      if (this.onPromptConfirm) this.onPromptConfirm(this.promptValue)
+      this.showPrompt = false
     },
   },
 })
