@@ -3,6 +3,9 @@ import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { api } from '@/api' // Pastikan path api sesuai
+import { useAlertStore } from '@/stores/alert'
+
+const alertStore = useAlertStore()
 
 // --- TIPTAP IMPORTS (Sama seperti di Editor) ---
 import { useEditor, EditorContent, VueNodeViewRenderer } from '@tiptap/vue-3'
@@ -55,6 +58,35 @@ const editor = useEditor({
     },
   },
 })
+
+// Fungsi Share
+const handleShare = async () => {
+  // 1. Siapkan Data
+  const shareData = {
+    title: article.value?.title || 'Artikel Keren',
+    text: `Baca artikel menarik ini: ${article.value?.title}`,
+    url: window.location.href, // Ambil URL halaman saat ini
+  }
+
+  // 2. Cek apakah Browser support Native Share (biasanya di HP)
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData)
+      // Opsional: alertStore.toast('Berhasil dibagikan!');
+    } catch (err) {
+      // User membatalkan share (klik close), tidak perlu error
+      console.log('Share dibatalkan')
+    }
+  } else {
+    // 3. Fallback untuk Desktop: Copy Link ke Clipboard
+    try {
+      await navigator.clipboard.writeText(window.location.href)
+      alertStore.toast('Link artikel berhasil disalin!')
+    } catch (err) {
+      alertStore.toast('Gagal menyalin link', 'error')
+    }
+  }
+}
 
 onMounted(async () => {
   try {
@@ -122,7 +154,7 @@ onBeforeUnmount(() => {
           </span>
           <span class="flex items-center gap-1">
             <Icon icon="lucide:calendar" class="w-3.5 h-3.5" />
-            {{ formatDate(article.created_at) }}
+            {{ formatDate(article.createdAt) }}
           </span>
         </div>
 
@@ -152,9 +184,15 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="mt-16 pt-8 border-t border-zinc-800 flex justify-between items-center">
-        <div class="text-zinc-500 text-sm">&copy; 2024 Concern Blog. All rights reserved.</div>
+        <div class="text-zinc-500 text-sm">
+          &copy; {{ new Date().getFullYear() }} Concern Blog. All rights reserved.
+        </div>
         <div class="flex gap-4">
-          <button class="text-zinc-400 hover:text-white">
+          <button
+            @click="handleShare"
+            class="text-zinc-400 hover:text-white flex items-center gap-2 group transition-colors"
+            title="Bagikan Artikel"
+          >
             <Icon icon="lucide:share-2" class="w-5 h-5" />
           </button>
         </div>

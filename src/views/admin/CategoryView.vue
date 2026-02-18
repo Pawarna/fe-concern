@@ -2,6 +2,9 @@
 import { ref, onMounted, computed } from 'vue'
 import { Icon } from '@iconify/vue'
 import { api } from '@/api'
+import { useAlertStore } from '@/stores/alert'
+
+const alertStore = useAlertStore()
 
 // --- STATE ---
 const categories = ref<any[]>([])
@@ -82,7 +85,7 @@ const handleNameInput = () => {
 
 // --- CRUD ACTIONS ---
 const submitForm = async () => {
-  if (!form.value.name) return alert('Nama Kategori wajib diisi!')
+  if (!form.value.name) return alertStore.toast('Nama Kategori wajib diisi!', 'error')
 
   isSubmitting.value = true
   try {
@@ -104,26 +107,29 @@ const submitForm = async () => {
     await fetchCategories()
     closeModal()
   } catch (error: any) {
-    alert(error.response?.data?.message || 'Gagal menyimpan kategori.')
+    alertStore.toast(
+      error.response?.data?.error[0]?.message || 'Gagal menyimpan kategori.',
+      'error',
+    )
   } finally {
     isSubmitting.value = false
   }
 }
 
 const deleteCategory = async (id: number) => {
-  if (
-    !confirm(
+  alertStore.confirm({
+    title: 'Konfirmasi Hapus',
+    message:
       'Yakin ingin menghapus kategori ini? Artikel di dalamnya mungkin akan kehilangan kategori.',
-    )
-  )
-    return
-
-  try {
-    await api.delete(`/category/${id}`)
-    await fetchCategories()
-  } catch (error) {
-    alert('Gagal menghapus kategori.')
-  }
+    async onConfirm() {
+      try {
+        await api.delete(`/category/${id}`)
+        await fetchCategories()
+      } catch (error) {
+        alertStore.toast('Gagal menghapus kategori.', 'error')
+      }
+    },
+  })
 }
 </script>
 
@@ -202,7 +208,7 @@ const deleteCategory = async (id: number) => {
                 </span>
               </td>
               <td class="px-6 py-4 text-center text-zinc-500">
-                {{ cat.articles_count || '-' }}
+                {{ cat._count.artikels || '-' }}
               </td>
               <td class="px-6 py-4 text-right">
                 <div class="flex items-center justify-end gap-2">
