@@ -71,6 +71,11 @@ const router = createRouter({
           component: () => import('@/views/admin/CategoryView.vue'),
           meta: { title: 'Daftar Kategori', requiresAuth: true },
         },
+        {
+          path: 'portfolios', // bisa diakses di /admin/portfolios
+          name: 'admin-portfolio',
+          component: () => import('@/views/admin/portfolio/Index.vue'),
+        },
       ],
     },
 
@@ -98,20 +103,45 @@ const router = createRouter({
 
 const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true'
 
+function isTokenValid(): boolean {
+  const token = localStorage.getItem('token')
+  if (!token) return false
+
+  // Try to decode JWT and verify `exp` claim. If token is not JWT, assume valid.
+  try {
+    const parts = token.split('.')
+    if (parts.length !== 3) return true
+    const payload = JSON.parse(atob(parts[1]!))
+    if (!payload.exp) return true
+    // exp is in seconds
+    return payload.exp * 1000 > Date.now()
+  } catch (err) {
+    return true
+  }
+}
+
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('token')
+  const isAuthenticated = isTokenValid()
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
+
   if (isMaintenanceMode && to.name !== 'maintenance') {
     next({ name: 'maintenance' })
+    return
   }
 
   if (requiresAuth && !isAuthenticated) {
+    // Ensure token removed to avoid stale state
+    localStorage.removeItem('token')
     next({ name: 'login' })
-  } else if (to.name === 'login' && isAuthenticated) {
-    next({ name: 'admin-dashboard' })
-  } else {
-    next()
+    return
   }
+
+  if (to.name === 'login' && isAuthenticated) {
+    next({ name: 'admin-dashboard' })
+    return
+  }
+
+  next()
 })
 
 router.afterEach((to) => {

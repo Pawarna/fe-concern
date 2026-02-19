@@ -25,6 +25,12 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       // Misal: Jika token expired, paksa logout
       localStorage.removeItem('token')
+      try {
+        // Redirect user to login page
+        window.location.href = '/auth/login'
+      } catch (e) {
+        // noop
+      }
     }
     return Promise.reject(error)
   },

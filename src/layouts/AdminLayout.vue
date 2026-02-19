@@ -80,16 +80,16 @@ const isActive = (path: string) => route.path.startsWith(path)
         </router-link>
 
         <router-link
-          to="/admin/galeri"
+          to="/admin/portfolios"
           class="flex items-center px-3 py-2.5 rounded-lg transition-all duration-200 group"
           :class="
-            isActive('/admin/galeri')
+            isActive('/admin/portfolios')
               ? 'bg-blue-600/10 text-blue-500'
               : 'text-zinc-500 hover:text-zinc-200 hover:bg-zinc-900'
           "
         >
-          <Icon icon="lucide:image" class="w-5 h-5 mr-3" />
-          <span class="font-medium text-sm">Galeri</span>
+          <Icon icon="lucide:briefcase" class="w-5 h-5 mr-3" />
+          <span class="font-medium text-sm">Portofolio</span>
         </router-link>
 
         <div class="mt-8 mb-2 px-3 text-xs font-bold text-zinc-600 uppercase tracking-wider">

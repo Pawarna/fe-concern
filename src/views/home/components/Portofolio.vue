@@ -8,6 +8,7 @@ interface Project {
   title: string
   description: string
   imageUrl: string // Sesuai kolom database kamu
+  link: string
   tags?: [
     {
       id: Number
@@ -68,7 +69,9 @@ onMounted(async () => {
       </div>
 
       <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div
+        <a
+          :href="project.link"
+          target="_blank"
           v-for="(project, index) in projects"
           :key="project.id"
           class="group relative overflow-hidden rounded-xl bg-slate-800/40 border border-slate-700 hover:border-concern-accent transition-all duration-300"
@@ -107,7 +110,7 @@ onMounted(async () => {
           <div
             class="absolute inset-0 bg-gradient-to-t from-concern-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8"
           ></div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
