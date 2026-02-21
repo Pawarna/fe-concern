@@ -1,111 +1,144 @@
 <template>
-  <section id="techstack" class="py-24 px-6 bg-concern-dark relative overflow-hidden">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-20" data-aos="fade-up">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Tech Stack</h2>
-        <p class="text-slate-400 max-w-2xl mx-auto text-lg">
-          Kami menggunakan teknologi modern, scalable, dan production-ready untuk memastikan
-          performa dan keamanan terbaik.
+  <section id="techstack" class="py-32 px-6 bg-black relative overflow-hidden selection:bg-white selection:text-black">
+    <div class="absolute inset-0 pointer-events-none opacity-10">
+      <div class="w-full h-[1px] bg-white animate-[scan_4s_linear_infinite]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="flex flex-col md:flex-row items-end justify-between mb-24 gap-8" data-aos="fade-up">
+        <div class="max-w-xl">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-2 h-2 bg-white rotate-45"></div>
+            <span class="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-500">Tech Inventory v2.0</span>
+          </div>
+          <h2 class="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
+            ENGINE <span class="text-transparent text-outline-white italic">STACK</span>
+          </h2>
+        </div>
+        <p class="text-zinc-500 max-w-xs text-[11px] uppercase tracking-[0.2em] leading-6 text-right">
+          Menggunakan arsitektur <span class="text-white">production-ready</span> untuk keamanan dan integritas data maksimal.
         </p>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
-        <!-- React / Next -->
-        <div
-          class="group p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-concern-accent transition-all duration-300 hover:-translate-y-2 shadow-xl hover:shadow-cyan-900/40 text-center"
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border-white/5 border-l border-t">
+        <div 
+          class="group p-10 border-r border-b border-white/5 hover:bg-white transition-all duration-700 relative overflow-hidden"
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          <div
-            class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-2xl bg-concern-accent/10 group-hover:bg-concern-accent/20 transition text-3xl"
-          >
-            ⚛️
+          <div class="relative z-10">
+            <div class="mb-10 text-white group-hover:text-black transition-colors duration-500 font-black text-3xl tracking-tighter italic">
+              NXT
+            </div>
+            <h3 class="text-[11px] font-black text-zinc-500 group-hover:text-black transition-colors uppercase tracking-widest mb-1">Next.js</h3>
+            <p class="text-[9px] text-zinc-700 group-hover:text-zinc-600 transition-colors uppercase tracking-widest">Frontend & SSR</p>
           </div>
-
-          <h3 class="text-sm font-semibold">React / Next.js</h3>
-          <p class="text-xs text-slate-400 mt-2">Modern frontend & SSR</p>
+          <div class="absolute bottom-[-20%] right-[-10%] text-black/5 text-6xl font-black group-hover:text-black/10 transition-all pointer-events-none">JS</div>
         </div>
 
-        <!-- Node -->
-        <div
-          class="group p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-concern-primary transition-all duration-300 hover:-translate-y-2 shadow-xl hover:shadow-indigo-900/40 text-center"
-          data-aos="fade-up"
-          data-aos-delay="150"
-        >
-          <div
-            class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-2xl bg-concern-primary/10 group-hover:bg-concern-primary/20 transition text-3xl"
-          >
-            🟢
-          </div>
-
-          <h3 class="text-sm font-semibold">Node.js / NestJS</h3>
-          <p class="text-xs text-slate-400 mt-2">Scalable API backend</p>
-        </div>
-
-        <!-- Python -->
-        <div
-          class="group p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-purple-500 transition-all duration-300 hover:-translate-y-2 shadow-xl hover:shadow-purple-900/40 text-center"
+        <div 
+          class="group p-10 border-r border-b border-white/5 hover:bg-white transition-all duration-700 relative overflow-hidden"
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          <div
-            class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-2xl bg-purple-600/10 group-hover:bg-purple-600/20 transition text-3xl"
-          >
-            🐍
+          <div class="relative z-10">
+            <div class="mb-10 text-white group-hover:text-black transition-colors duration-500 font-black text-3xl tracking-tighter italic">
+              NST
+            </div>
+            <h3 class="text-[11px] font-black text-zinc-500 group-hover:text-black transition-colors uppercase tracking-widest mb-1">NestJS</h3>
+            <p class="text-[9px] text-zinc-700 group-hover:text-zinc-600 transition-colors uppercase tracking-widest">Scalable Backend</p>
           </div>
-
-          <h3 class="text-sm font-semibold">Python / FastAPI</h3>
-          <p class="text-xs text-slate-400 mt-2">AI & high-performance API</p>
+          <div class="absolute bottom-[-20%] right-[-10%] text-black/5 text-6xl font-black group-hover:text-black/10 transition-all pointer-events-none">TS</div>
         </div>
 
-        <!-- Mobile -->
-        <div
-          class="group p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-concern-accent transition-all duration-300 hover:-translate-y-2 shadow-xl hover:shadow-cyan-900/40 text-center"
-          data-aos="fade-up"
-          data-aos-delay="250"
-        >
-          <div
-            class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-2xl bg-concern-accent/10 group-hover:bg-concern-accent/20 transition text-3xl"
-          >
-            📱
-          </div>
-
-          <h3 class="text-sm font-semibold">Flutter / React Native</h3>
-          <p class="text-xs text-slate-400 mt-2">Cross-platform mobile</p>
-        </div>
-
-        <!-- Database -->
-        <div
-          class="group p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-concern-primary transition-all duration-300 hover:-translate-y-2 shadow-xl hover:shadow-indigo-900/40 text-center"
+        <div 
+          class="group p-10 border-r border-b border-white/5 hover:bg-white transition-all duration-700 relative overflow-hidden"
           data-aos="fade-up"
           data-aos-delay="300"
         >
-          <div
-            class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-2xl bg-concern-primary/10 group-hover:bg-concern-primary/20 transition text-3xl"
-          >
-            🐘
+          <div class="relative z-10">
+            <div class="mb-10 text-white group-hover:text-black transition-colors duration-500 font-black text-3xl tracking-tighter italic">
+              PYT
+            </div>
+            <h3 class="text-[11px] font-black text-zinc-500 group-hover:text-black transition-colors uppercase tracking-widest mb-1">Python</h3>
+            <p class="text-[9px] text-zinc-700 group-hover:text-zinc-600 transition-colors uppercase tracking-widest">AI & Processing</p>
           </div>
-
-          <h3 class="text-sm font-semibold">PostgreSQL</h3>
-          <p class="text-xs text-slate-400 mt-2">Relational database</p>
+          <div class="absolute bottom-[-20%] right-[-10%] text-black/5 text-6xl font-black group-hover:text-black/10 transition-all pointer-events-none">AI</div>
         </div>
 
-        <!-- Cloud -->
-        <div
-          class="group p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 hover:border-concern-accent transition-all duration-300 hover:-translate-y-2 shadow-xl hover:shadow-cyan-900/40 text-center"
+        <div 
+          class="group p-10 border-r border-b border-white/5 hover:bg-white transition-all duration-700 relative overflow-hidden"
           data-aos="fade-up"
-          data-aos-delay="350"
+          data-aos-delay="400"
         >
-          <div
-            class="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-2xl bg-concern-accent/10 group-hover:bg-concern-accent/20 transition text-3xl"
-          >
-            ☁️
+          <div class="relative z-10">
+            <div class="mb-10 text-white group-hover:text-black transition-colors duration-500 font-black text-3xl tracking-tighter italic">
+              FLT
+            </div>
+            <h3 class="text-[11px] font-black text-zinc-500 group-hover:text-black transition-colors uppercase tracking-widest mb-1">Flutter</h3>
+            <p class="text-[9px] text-zinc-700 group-hover:text-zinc-600 transition-colors uppercase tracking-widest">Mobile Engine</p>
           </div>
+          <div class="absolute bottom-[-20%] right-[-10%] text-black/5 text-6xl font-black group-hover:text-black/10 transition-all pointer-events-none">APP</div>
+        </div>
 
-          <h3 class="text-sm font-semibold">AWS / Vercel</h3>
-          <p class="text-xs text-slate-400 mt-2">Cloud & deployment</p>
+        <div 
+          class="group p-10 border-r border-b border-white/5 hover:bg-white transition-all duration-700 relative overflow-hidden"
+          data-aos="fade-up"
+          data-aos-delay="500"
+        >
+          <div class="relative z-10">
+            <div class="mb-10 text-white group-hover:text-black transition-colors duration-500 font-black text-3xl tracking-tighter italic">
+              SQL
+            </div>
+            <h3 class="text-[11px] font-black text-zinc-500 group-hover:text-black transition-colors uppercase tracking-widest mb-1">Postgres</h3>
+            <p class="text-[9px] text-zinc-700 group-hover:text-zinc-600 transition-colors uppercase tracking-widest">Data Integrity</p>
+          </div>
+          <div class="absolute bottom-[-20%] right-[-10%] text-black/5 text-6xl font-black group-hover:text-black/10 transition-all pointer-events-none">DB</div>
+        </div>
+
+        <div 
+          class="group p-10 border-r border-b border-white/5 hover:bg-white transition-all duration-700 relative overflow-hidden"
+          data-aos="fade-up"
+          data-aos-delay="600"
+        >
+          <div class="relative z-10">
+            <div class="mb-10 text-white group-hover:text-black transition-colors duration-500 font-black text-3xl tracking-tighter italic">
+              AWS
+            </div>
+            <h3 class="text-[11px] font-black text-zinc-500 group-hover:text-black transition-colors uppercase tracking-widest mb-1">Cloud</h3>
+            <p class="text-[9px] text-zinc-700 group-hover:text-zinc-600 transition-colors uppercase tracking-widest">Infrastructure</p>
+          </div>
+          <div class="absolute bottom-[-20%] right-[-10%] text-black/5 text-6xl font-black group-hover:text-black/10 transition-all pointer-events-none">OPS</div>
+        </div>
+      </div>
+
+      <div class="mt-20 flex justify-center overflow-hidden">
+        <div class="flex gap-20 whitespace-nowrap animate-marquee">
+          <span v-for="i in 10" :key="i" class="text-[10px] font-black text-zinc-800 uppercase tracking-[1em]">
+            Scalable — Secure — Production Ready — Optimized — Scalable — Secure — Production Ready — Optimized
+          </span>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.text-outline-white {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes scan {
+  from { transform: translateY(-100vh); }
+  to { transform: translateY(100vh); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+</style>

@@ -22,6 +22,11 @@ const router = createRouter({
       name: 'services',
       component: () => import('@/views/detail_service/DetailService.vue'),
     },
+    {
+      path: '/terms-and-conditions',
+      name: 'terms-and-conditions',
+      component: () => import('@/views/public/TermAndConditionView.vue'),
+    },
     // Auth
     {
       path: '/auth',

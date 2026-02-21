@@ -36,82 +36,101 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section id="portfolio" class="py-20 px-6 bg-concern-dark text-white">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-4" data-aos="fade-up">Portofolio</h2>
-      <p
-        class="text-xl text-slate-400 text-center mb-16 max-w-3xl mx-auto"
-        data-aos="fade-up"
-        data-aos-delay="200"
-      >
-        Beberapa proyek terpilih yang menunjukkan keahlian dalam pengembangan web dan desain.
-      </p>
+  <section id="portfolio" class="py-32 px-6 bg-black relative selection:bg-white selection:text-black">
+    <div class="absolute inset-0 pointer-events-none opacity-[0.03]">
+      <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+    </div>
 
-      <div v-if="loading" class="text-center py-20">
-        <div
-          class="animate-spin rounded-full h-12 w-12 border-t-2 border-concern-accent mx-auto"
-        ></div>
-        <p class="mt-4 text-slate-400 font-display">Menyelam ke database...</p>
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="flex flex-col md:flex-row items-end justify-between mb-24 gap-8" data-aos="fade-up">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-8 h-[1px] bg-white"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-500">Selected Artifacts</span>
+          </div>
+          <h2 class="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9]">
+            WORKS <span class="text-transparent text-outline-white italic">& CASES</span>
+          </h2>
+        </div>
+        <p class="text-zinc-500 max-w-xs text-[11px] uppercase tracking-[0.2em] leading-6 md:text-right">
+          Manifestasi kode dan desain ke dalam <span class="text-white">solusi digital</span> fungsional.
+        </p>
       </div>
 
-      <div
-        v-else-if="errorMsg"
-        class="p-6 bg-red-900/40 border border-red-700 rounded-xl text-center text-red-300 mb-12"
-      >
-        {{ errorMsg }}
+      <div v-if="loading" class="py-32 text-center border-t border-white/5">
+        <div class="w-12 h-12 border border-white/20 border-t-white animate-spin mx-auto mb-6"></div>
+        <p class="text-[10px] uppercase tracking-[0.4em] text-zinc-600 font-mono">Accessing_Repository...</p>
       </div>
 
-      <div
-        v-else-if="projects.length === 0"
-        class="p-6 bg-slate-800/60 border border-slate-700 rounded-xl text-center text-slate-400 mb-12"
-      >
-        Belum ada proyek yang ditampilkan saat ini.
+      <div v-else-if="errorMsg" class="p-10 border border-white/10 bg-white/5 text-center">
+        <p class="text-xs uppercase tracking-widest text-white italic">Error: {{ errorMsg }}</p>
       </div>
 
-      <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10">
         <a
           :href="project.link"
           target="_blank"
           v-for="(project, index) in projects"
           :key="project.id"
-          class="group relative overflow-hidden rounded-xl bg-slate-800/40 border border-slate-700 hover:border-concern-accent transition-all duration-300"
+          class="group relative bg-black p-8 md:p-12 transition-all duration-700 overflow-hidden block"
           data-aos="fade-up"
           :data-aos-delay="index * 100"
         >
-          <div class="aspect-[4/3] overflow-hidden">
+          <div class="aspect-video mb-10 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-1000">
             <img
-              :src="
-                project.imageUrl
-                  ? `${project.imageUrl}`
-                  : 'https://via.placeholder.com/800x600?text=No+Image'
-              "
+              :src="project.imageUrl || 'https://via.placeholder.com/800x600?text=NO_ASSET'"
               :alt="project.title"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"
             />
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-[2000ms] ease-in-out"></div>
           </div>
 
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">{{ project.title }}</h3>
-            <p class="text-slate-400 mb-4 line-clamp-2">
-              {{ project.description || 'No description available' }}
+          <div class="relative z-10">
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter group-hover:italic transition-all">
+                {{ project.title }}
+              </h3>
+              <span class="text-[10px] font-mono text-zinc-700">00{{ index + 1 }}</span>
+            </div>
+
+            <p class="text-zinc-500 text-xs leading-relaxed uppercase tracking-widest max-w-md mb-8 group-hover:text-zinc-300 transition-colors">
+              {{ project.description || 'System detailed architecture documentation pending.' }}
             </p>
 
-            <div v-if="project.tags && project.tags.length > 0" class="flex flex-wrap gap-2">
+            <div v-if="project.tags && project.tags.length > 0" class="flex flex-wrap gap-x-4 gap-y-2">
               <span
                 v-for="tag in project.tags"
                 :key="tag.name"
-                class="px-3 py-1 bg-slate-700 rounded-full text-xs text-concern-accent"
+                class="text-[9px] font-bold uppercase tracking-[0.3em] text-zinc-600 border-b border-zinc-800 pb-1 group-hover:text-white group-hover:border-white transition-all"
               >
-                {{ tag.name }}
+                // {{ tag.name }}
               </span>
             </div>
           </div>
 
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-concern-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8"
-          ></div>
+          <div class="absolute top-8 right-8 w-12 h-12 border border-white/0 group-hover:border-white/20 transition-all duration-500 flex items-center justify-center">
+             <svg class="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="square" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+             </svg>
+          </div>
         </a>
       </div>
+
+      <div v-if="!loading && projects.length === 0" class="py-32 text-center border border-white/5">
+        <p class="text-[10px] uppercase tracking-[0.4em] text-zinc-700">Repository_Empty</p>
+      </div>
+
     </div>
   </section>
 </template>
+
+<style scoped>
+.text-outline-white {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Custom Grid Gap Effect */
+.grid {
+  gap: 1px; /* Membuat garis antar grid menggunakan background parent */
+}
+</style>
