@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { api } from '@/api'
 import ArticleEditor from '@/components/admin/ArticleEditor.vue'
+import ImageUploader from '@/components/admin/ImageUploader.vue'
 import { useAlertStore } from '@/stores/alert'
 
 const alertStore = useAlertStore()
@@ -29,13 +30,6 @@ onMounted(async () => {
   }
 })
 
-const handleImageUpload = (event: Event) => {
-  const file = (event.target as HTMLInputElement).files?.[0]
-  if (file) {
-    imageFile.value = file
-    form.value.thumbnailPreview = URL.createObjectURL(file)
-  }
-}
 const removeImage = () => {
   imageFile.value = null
   form.value.thumbnailPreview = ''
@@ -57,7 +51,7 @@ const submitArticle = async () => {
     alertStore.toast('Artikel berhasil disimpan!', 'success')
     router.push('/admin/artikels')
   } catch (error: any) {
-    alertStore.toast(error.response?.data?.message || 'Gagal menyimpan.', 'error')
+    alertStore.toast(error.response?.data?.error[0].message || 'Gagal menyimpan.', 'error')
   } finally {
     isLoading.value = false
   }
@@ -125,44 +119,12 @@ const submitArticle = async () => {
           </div>
 
           <div class="md:col-span-4 flex flex-col">
-            <label class="block text-sm font-medium text-zinc-400 mb-2">Gambar Sampul</label>
-
-            <div
-              v-if="form.thumbnailPreview"
-              class="relative group rounded-lg overflow-hidden border border-zinc-700 bg-[#09090b] h-full min-h-[140px]"
-            >
-              <img
-                :src="form.thumbnailPreview"
-                class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"
-              />
-              <div
-                class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2"
-              >
-                <button
-                  @click="removeImage"
-                  class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg shadow-lg transition"
-                  title="Hapus"
-                >
-                  <Icon icon="lucide:trash-2" class="w-4 h-4" />
-                </button>
-                <label
-                  class="bg-zinc-700 hover:bg-zinc-600 text-white p-2 rounded-lg shadow-lg transition cursor-pointer"
-                  title="Ganti"
-                >
-                  <input type="file" @change="handleImageUpload" class="hidden" accept="image/*" />
-                  <Icon icon="lucide:refresh-cw" class="w-4 h-4" />
-                </label>
-              </div>
-            </div>
-
-            <label
-              v-else
-              class="border-2 border-dashed border-zinc-700 rounded-lg flex flex-col items-center justify-center text-zinc-500 hover:border-blue-500 hover:text-blue-500 hover:bg-blue-500/5 transition cursor-pointer h-full min-h-[140px]"
-            >
-              <input type="file" @change="handleImageUpload" class="hidden" accept="image/*" />
-              <Icon icon="lucide:image-plus" class="w-8 h-8 mb-2" />
-              <span class="text-xs font-medium">Upload Sampul</span>
-            </label>
+            <ImageUploader
+              label="Gambar Sampul"
+              :initial-image="form.thumbnailPreview"
+              @file-selected="imageFile = $event"
+              @cleared="removeImage"
+            />
           </div>
         </div>
       </div>

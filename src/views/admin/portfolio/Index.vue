@@ -3,6 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import { Icon } from '@iconify/vue'
 import { api } from '@/api'
 import { useAlertStore } from '@/stores/alert'
+import ImageUploader from '@/components/admin/ImageUploader.vue'
 
 const alertStore = useAlertStore()
 
@@ -90,19 +91,10 @@ const closeModal = () => {
   imageFile.value = null
 }
 
-// --- LOGIC IMAGE UPLOAD ---
-const handleImageUpload = (event: Event) => {
-  const file = (event.target as HTMLInputElement).files?.[0]
-  if (file) {
-    imageFile.value = file
-    form.value.thumbnailPreview = URL.createObjectURL(file)
-  }
-}
-
-const removeImage = () => {
-  imageFile.value = null
-  form.value.thumbnailPreview = ''
-}
+const handleClearImage = () => {
+  imageFile.value = null;
+  form.value.thumbnailPreview = ''; 
+};
 
 // --- CRUD ACTIONS ---
 const submitForm = async () => {
@@ -364,49 +356,13 @@ const deletePortfolio = (id: number) => {
           </div>
 
           <div class="flex flex-col h-full">
-            <label class="block text-sm font-medium text-zinc-400 mb-2">Gambar Preview</label>
-
-            <div
-              v-if="form.thumbnailPreview"
-              class="relative group rounded-lg overflow-hidden border border-zinc-700 bg-[#09090b] flex-1 min-h-[200px]"
-            >
-              <img
-                :src="form.thumbnailPreview"
-                class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"
-              />
-              <div
-                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2 backdrop-blur-sm"
-              >
-                <button
-                  type="button"
-                  @click="removeImage"
-                  class="bg-red-500 hover:bg-red-600 text-white p-2.5 rounded-lg shadow-lg transition"
-                  title="Hapus Gambar"
-                >
-                  <Icon icon="lucide:trash-2" class="w-5 h-5" />
-                </button>
-                <label
-                  class="bg-zinc-700 hover:bg-zinc-600 text-white p-2.5 rounded-lg shadow-lg transition cursor-pointer"
-                  title="Ganti Gambar"
-                >
-                  <input type="file" @change="handleImageUpload" class="hidden" accept="image/*" />
-                  <Icon icon="lucide:refresh-cw" class="w-5 h-5" />
-                </label>
-              </div>
-            </div>
-
-            <label
-              v-else
-              class="border-2 border-dashed border-zinc-700 rounded-lg flex flex-col items-center justify-center text-zinc-500 hover:border-blue-500 hover:text-blue-500 hover:bg-blue-500/5 transition cursor-pointer flex-1 min-h-[200px]"
-            >
-              <input type="file" @change="handleImageUpload" class="hidden" accept="image/*" />
-              <Icon
-                icon="lucide:image-plus"
-                class="w-10 h-10 mb-3 text-zinc-600 group-hover:text-blue-500"
-              />
-              <span class="text-sm font-medium">Klik untuk Upload Gambar</span>
-              <span class="text-xs text-zinc-600 mt-1">PNG, JPG atau WebP</span>
-            </label>
+            <ImageUploader
+              label="Gambar Preview"
+              :initial-image="form.thumbnailPreview"
+              @file-selected="imageFile = $event"
+              @cleared="handleClearImage"
+              class="h-full"
+            />
           </div>
 
           <div

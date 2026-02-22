@@ -16,7 +16,7 @@
     </div>
 
     <div class="relative z-10 max-w-6xl mx-auto text-center">
-      <div
+      <!-- <div
         class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 mb-8"
         data-aos="fade-down"
         data-aos-delay="100"
@@ -30,7 +30,7 @@
         <span class="text-xs font-medium text-slate-300 tracking-wider uppercase italic"
           >Available for new projects</span
         >
-      </div>
+      </div> -->
 
       <h1
         class="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[1.1] mb-8"

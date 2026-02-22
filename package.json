@@ -26,6 +26,7 @@
     "@tiptap/vue-3": "^3.19.0",
     "aos": "^2.3.4",
     "axios": "^1.13.5",
+    "browser-image-compression": "^2.0.2",
     "lodash": "^4.17.23",
     "pinia": "^3.0.4",
     "sweetalert2": "^11.26.18",

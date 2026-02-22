@@ -66,7 +66,7 @@ const contacts = [
       </div>
 
       <!-- Contact Form -->
-      <div class="max-w-3xl mx-auto">
+      <!-- <div class="max-w-3xl mx-auto">
         <h3 class="text-2xl font-semibold text-center mb-8">Or Send Us a Message</h3>
 
         <form
@@ -124,7 +124,7 @@ const contacts = [
             </button>
           </div>
         </form>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>

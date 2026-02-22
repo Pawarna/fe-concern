@@ -1,9 +1,11 @@
 <script setup lang="ts">
 const steps = [
   ['Discovery', 'Diskusi kebutuhan, goal bisnis, dan scope proyek.'],
+  ['Planning', 'Proposal teknis yang disertai dengan term & condition'],
   ['Design & Prototype', 'UI/UX design + clickable prototype untuk approval.'],
   ['Development', 'Pengembangan aplikasi sesuai desain dan kebutuhan yang telah disepakati.'],
   ['Review & Revision', 'Revisi aplikasi berdasarkan feedback dari klien.'],
+  ['Testing', 'Pengujian aplikasi secara menyeluruh'],
   ['Deployment', 'Deploy ke production server dan konfigurasi final.'],
   ['After Sales Support', 'Maintenance, monitoring, dan dukungan teknis berkelanjutan.'],
 ]
