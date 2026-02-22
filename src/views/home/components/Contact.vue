@@ -4,127 +4,118 @@ const contacts = [
     title: 'Email',
     value: 'concern.dev07@gmail.com',
     link: 'mailto:concern.dev07@gmail.com',
-    icon: '✉️',
+    code: 'SMTP',
   },
   {
     title: 'WhatsApp',
     value: '+62 852-1143-5617',
     link: 'https://wa.me/6285211435617?text=Halo%20Concern,%20saya%20ingin%20konsultasi%20proyek',
-    icon: '📱',
+    code: 'P2P',
   },
   {
     title: 'Instagram',
     value: '@concern.dev',
     link: 'https://instagram.com/concern.dev',
-    icon: '📸',
+    code: 'IG',
   },
   {
     title: 'Telegram',
     value: '@concerndev',
     link: 'https://t.me/concerndev',
-    icon: '💬',
+    code: 'TG',
   },
 ]
 </script>
+
 <template>
-  <section id="kontak" class="py-24 px-6 bg-concern-darker">
-    <div class="max-w-5xl mx-auto">
-      <!-- Heading -->
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up">Contact Us</h2>
-        <p class="text-slate-400 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="150">
-          Choose your preferred method to get in touch with us. We're ready to help bring your ideas
-          to life.
+  <section
+    id="kontak"
+    class="py-24 px-6 bg-black relative selection:bg-white selection:text-black overflow-hidden"
+  >
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-black text-white/[0.01] whitespace-nowrap pointer-events-none uppercase tracking-tighter"
+    >
+      Connect — Concern — Studio
+    </div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div
+        class="flex flex-col md:flex-row items-end justify-between mb-20 gap-8"
+        data-aos="fade-up"
+      >
+        <div class="max-w-xl">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-2 h-[1px] bg-zinc-500"></div>
+            <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-zinc-600"
+              >Transmission_Node</span
+            >
+          </div>
+          <h2
+            class="text-5xl md:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9]"
+          >
+            MULAI <br />
+            <span class="text-transparent text-outline-white italic">KONEKSI</span>
+          </h2>
+        </div>
+        <p
+          class="text-zinc-600 max-w-[240px] text-[10px] uppercase tracking-[0.15em] leading-5 md:text-right"
+        >
+          Siap mentransformasi visi Anda. <br />
+          <span class="text-zinc-400 font-bold italic">Pilih jalur transmisi.</span>
         </p>
       </div>
 
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
-        data-aos="fade-up"
-        data-aos-delay="250"
-      >
-        <!-- Quick Contact -->
-        <div v-for="items in contacts">
+      <div class="border-t border-white/5" data-aos="fade-up" data-aos-delay="200">
+        <div v-for="(item, index) in contacts" :key="index">
           <a
-            :href="items.link"
+            :href="item.link"
             target="_blank"
-            class="group flex flex-col items-center text-center p-6 bg-slate-800/40 border border-slate-700 rounded-xl hover:border-concern-accent hover:-translate-y-2 hover:bg-slate-800/70 transition-all duration-300"
+            class="group flex flex-col md:flex-row items-start md:items-center justify-between py-8 px-2 border-b border-white/5 hover:bg-white transition-all duration-500 relative overflow-hidden"
           >
-            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-              {{ items.icon }}
+            <div class="flex items-center gap-6 md:gap-12 relative z-10">
+              <span
+                class="text-[9px] font-mono text-zinc-800 group-hover:text-black/20 transition-colors tracking-widest"
+              >
+                [{{ item.code }}]
+              </span>
+              <h3
+                class="text-2xl md:text-3xl font-black text-white group-hover:text-black uppercase tracking-tighter transition-all duration-500 group-hover:italic"
+              >
+                {{ item.title }}
+              </h3>
             </div>
 
-            <span class="font-semibold text-lg">
-              {{ items.title }}
-            </span>
-
-            <span class="text-sm text-slate-400 mt-1">
-              {{ items.value }}
-            </span>
+            <div class="mt-2 md:mt-0 relative z-10 flex items-center gap-4">
+              <span
+                class="text-xs md:text-sm font-medium text-zinc-600 group-hover:text-black transition-colors tracking-tight uppercase"
+              >
+                {{ item.value }}
+              </span>
+              <svg
+                class="w-4 h-4 text-white group-hover:text-black transition-all opacity-0 group-hover:opacity-100 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="square" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
           </a>
         </div>
       </div>
 
-      <!-- Contact Form -->
-      <!-- <div class="max-w-3xl mx-auto">
-        <h3 class="text-2xl font-semibold text-center mb-8">Or Send Us a Message</h3>
-
-        <form
-          action="process/contact.php"
-          method="POST"
-          class="grid md:grid-cols-2 gap-6"
-          data-aos="fade-up"
-          data-aos-delay="400"
-        >
-          <div>
-            <label class="block text-sm font-medium mb-2">Full Name</label>
-            <input
-              type="text"
-              name="name"
-              required
-              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-concern-accent transition"
-            />
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium mb-2">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-concern-accent transition"
-            />
-          </div>
-
-          <div class="md:col-span-2">
-            <label class="block text-sm font-medium mb-2">Phone / WhatsApp</label>
-            <input
-              type="tel"
-              name="phone"
-              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-concern-accent transition"
-            />
-          </div>
-
-          <div class="md:col-span-2">
-            <label class="block text-sm font-medium mb-2">Tell Us About Your Project</label>
-            <textarea
-              name="message"
-              rows="6"
-              required
-              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-concern-accent transition"
-            ></textarea>
-          </div>
-
-          <div class="md:col-span-2 text-center">
-            <button
-              type="submit"
-              class="px-10 py-4 bg-concern-primary hover:bg-indigo-600 text-white font-semibold rounded-lg transition shadow-lg shadow-indigo-900/30"
-            >
-              Send Message
-            </button>
-          </div>
-        </form>
+      <!-- <div class="mt-24 flex justify-between items-center text-[9px] font-bold uppercase tracking-[0.4em] text-zinc-800" data-aos="fade-up">
+        <div>© 2026 CONCERN STUDIO</div>
+        <div class="hidden md:block">7.7971° S, 110.3705° E [YOGYAKARTA]</div>
       </div> -->
     </div>
   </section>
 </template>
+
+<style scoped>
+.text-outline-white {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Row-by-row delay dihapus untuk kesan minimal */
+</style>

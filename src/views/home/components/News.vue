@@ -75,110 +75,117 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="news" class="py-24 px-6 bg-slate-900">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white" data-aos="fade-up">
-          News & Updates
-        </h2>
-        <p class="text-slate-400 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="150">
-          Ikuti perkembangan terbaru seputar teknologi, tutorial, dan kegiatan komunitas kami.
+  <section id="news" class="py-32 px-6 bg-black relative overflow-hidden selection:bg-white selection:text-black">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8" data-aos="fade-up">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="h-[1px] w-12 bg-white"></div>
+            <span class="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-500">Journal & Insights</span>
+          </div>
+          <h2 class="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
+            ARCHIVE <span class="text-transparent text-outline-white italic">NEWS</span>
+          </h2>
+        </div>
+        <p class="text-zinc-500 max-w-sm text-[11px] uppercase tracking-[0.2em] leading-6 text-right">
+          Dokumentasi perkembangan teknologi, <span class="text-white font-bold">riset internal</span>, dan pembaruan sistem.
         </p>
       </div>
 
-      <div v-if="loading" class="flex flex-col items-center justify-center py-20">
-        <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div>
-        <p class="mt-4 text-slate-500 font-medium">Memuat artikel...</p>
+      <div v-if="loading" class="flex flex-col items-center justify-center py-32 border border-white/5 bg-zinc-950/30">
+        <div class="w-12 h-12 border-2 border-zinc-800 border-t-white animate-spin"></div>
+        <p class="mt-6 text-[10px] uppercase tracking-[0.4em] text-zinc-500">Synchronizing Data...</p>
       </div>
 
       <div
         v-else-if="news.length === 0"
-        class="flex flex-col items-center justify-center py-20 px-6 bg-slate-800/20 border border-dashed border-slate-700 rounded-3xl"
+        class="flex flex-col items-center justify-center py-32 border border-dashed border-zinc-800"
         data-aos="zoom-in"
       >
-        <div class="text-6xl mb-6 opacity-40 grayscale">📰</div>
-        <h3 class="text-2xl font-semibold text-slate-300 mb-2">Belum ada berita</h3>
-        <p class="text-slate-500 text-center max-w-sm mb-6">
-          Kami sedang menyiapkan konten menarik untukmu. Pantau terus halaman ini ya!
-        </p>
+        <span class="text-[10px] font-mono text-zinc-600 uppercase tracking-widest mb-4">[ NULL_DATA_RETURNED ]</span>
+        <h3 class="text-xl font-black text-zinc-300 uppercase tracking-tighter mb-6">Arsip belum tersedia</h3>
         <button
           @click="fetchData"
-          class="text-blue-500 hover:text-blue-400 font-medium text-sm transition"
+          class="px-8 py-3 border border-white/20 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
         >
-          Refresh Data
+          Re-Initialize Fetch
         </button>
       </div>
 
-      <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 border-l border-t border-white/10">
         <article
           v-for="(item, index) in news"
           :key="item.id"
-          class="group bg-slate-800/40 border border-slate-700/50 rounded-2xl overflow-hidden hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col h-full"
+          class="group border-r border-b border-white/10 p-0 hover:bg-white transition-all duration-700 cursor-crosshair flex flex-col"
           data-aos="fade-up"
           :data-aos-delay="(index + 1) * 100"
           @click="goToDetail(item.slug)"
         >
-          <div class="h-48 overflow-hidden relative bg-slate-800">
+          <div class="aspect-video overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
             <img
               v-if="item.thumbnail"
               :src="item.thumbnail"
               :alt="item.title"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
             />
-            <div
-              v-else
-              class="w-full h-full flex items-center justify-center text-slate-600 bg-slate-800"
-            >
-              <span class="text-4xl opacity-20">IMAGE</span>
+            <div v-else class="w-full h-full flex items-center justify-center bg-zinc-900 text-[10px] tracking-[0.5em] text-zinc-700 uppercase font-black">
+              No_Preview_Available
             </div>
-
+            
             <div
               v-if="item.category"
-              class="absolute top-4 left-4 bg-blue-600/90 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+              class="absolute top-0 right-0 bg-white text-black text-[9px] font-black px-4 py-2 uppercase tracking-widest"
             >
               {{ item.category.name }}
             </div>
+
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[size:100%_2px,3px_100%] pointer-events-none opacity-40"></div>
           </div>
 
-          <div class="p-6 flex-1 flex flex-col">
-            <div class="text-xs text-slate-500 mb-3 flex items-center gap-2">
-              <span>{{ formatDate(item.createdAt) }}</span>
-              <span class="w-1 h-1 rounded-full bg-slate-600"></span>
-              <span>{{ item.author?.username || 'Admin' }}</span>
+          <div class="p-8 flex-1 flex flex-col">
+            <div class="flex items-center justify-between mb-6">
+               <span class="text-[9px] font-bold text-zinc-500 group-hover:text-zinc-400 transition-colors uppercase tracking-[0.2em]">
+                {{ formatDate(item.createdAt) }}
+              </span>
+              <span class="text-[9px] font-mono text-zinc-700 group-hover:text-black tracking-widest uppercase">
+                ID: {{ item.id }}
+              </span>
             </div>
 
-            <h3
-              class="text-xl font-bold text-slate-100 mb-3 line-clamp-2 group-hover:text-blue-400 transition-colors"
-            >
+            <h3 class="text-xl font-black text-white group-hover:text-black mb-4 line-clamp-2 uppercase tracking-tighter leading-tight transition-colors duration-500">
               {{ item.title }}
             </h3>
 
-            <p class="text-slate-400 text-sm line-clamp-3 mb-6 flex-1">
+            <p class="text-zinc-500 group-hover:text-zinc-700 text-xs leading-6 uppercase tracking-wider line-clamp-3 mb-8 flex-1 transition-colors duration-500">
               {{ getSnippet(item.content) }}
             </p>
 
-            <div
-              class="flex items-center text-blue-500 font-medium text-sm group-hover:gap-2 transition-all"
-            >
-              Baca Selengkapnya
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
+            <div class="flex items-center justify-between pt-6 border-t border-white/5 group-hover:border-black/10 transition-colors">
+              <span class="text-[10px] font-black uppercase tracking-[0.3em] text-white group-hover:text-black">Open_Report</span>
+              <svg class="w-5 h-5 text-zinc-500 group-hover:text-black group-hover:translate-x-2 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="square" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </div>
           </div>
         </article>
       </div>
+
     </div>
   </section>
 </template>
+
+<style scoped>
+.text-outline-white {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Custom Grayscale Animation */
+.grayscale {
+  filter: grayscale(100%) contrast(110%);
+}
+
+.group:hover .grayscale {
+  filter: grayscale(0%) contrast(100%);
+}
+</style>

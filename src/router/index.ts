@@ -23,9 +23,9 @@ const router = createRouter({
       component: () => import('@/views/detail_service/DetailService.vue'),
     },
     {
-      path: '/term-and-conditions',
-      name: 'term-and-conditions',
-      component: () => import('@/views/public/TermAndConditionsView.vue'),
+      path: '/terms-and-conditions',
+      name: 'terms-and-conditions',
+      component: () => import('@/views/public/TermAndConditionView.vue'),
     },
     // Auth
     {
