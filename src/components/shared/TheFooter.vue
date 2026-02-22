@@ -69,8 +69,8 @@
         </p>
 
         <div class="flex gap-8 mt-6 md:mt-0">
-          <a href="#" class="hover:text-white transition-colors">Privacy</a>
-          <RouterLink to="/terms-and-conditions" class="hover:text-white transition-colors">Terms</RouterLink>
+          <RouterLink to="/privacy&policy" class="hover:text-white transition-colors">Privacy & Policy</RouterLink>
+          <RouterLink to="/terms-and-conditions" class="hover:text-white transition-colors">Terms & Conditions</RouterLink>
           <span class="text-zinc-800">43.8151° N, 120.3202° E</span>
         </div>
       </div>

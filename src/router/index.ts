@@ -23,6 +23,12 @@ const router = createRouter({
       component: () => import('@/views/detail_service/DetailService.vue'),
     },
     {
+      path: '/privacy&policy',
+      name: 'privacy&policy',
+      component: () => import('@/views/public/PrivacyAndPolicyView.vue'),
+
+    },
+    {
       path: '/terms-and-conditions',
       name: 'terms-and-conditions',
       component: () => import('@/views/public/TermAndConditionView.vue'),
