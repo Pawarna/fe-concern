@@ -16,7 +16,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
           <div class="text-center mb-32" data-aos="fade-up">
             <div class="flex items-center justify-center gap-3 mb-6">
               <span class="w-2 h-2 bg-white rotate-45"></span>
-              <span class="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-500 italic">Service Catalog v2.6</span>
+              <span class="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-500 italic">Service Catalog</span>
             </div>
             <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter uppercase leading-[0.85] mb-8">
               PRICING <br />
@@ -39,41 +39,24 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
             </div>
 
             <div class="grid md:grid-cols-3 border-l border-t border-white/5">
-              <div class="border-r border-b border-white/5 p-10 hover:bg-white transition-all duration-700 group" data-aos="fade-up">
-                <h3 class="text-xs font-black text-zinc-500 group-hover:text-black uppercase tracking-[0.3em] mb-2">Basic Tier</h3>
-                <div class="text-2xl font-black text-white group-hover:text-black tracking-tighter mb-8 italic">IDR 300K <span class="text-[10px] font-normal tracking-widest">/ PAGE</span></div>
-                <ul class="space-y-4 mb-12 text-[11px] uppercase tracking-widest text-zinc-500 group-hover:text-black">
-                  <li>— 01 High Fidelity (Figma)</li>
-                  <li>— Responsive Layout</li>
-                  <li>— Single Revision Cycle</li>
-                  <li>— Source Assets Included</li>
+              <div v-for="(pkg, idx) in [
+                { tier: 'Basic Tier', price: '300K', unit: '/ PAGE', items: ['01 High Fidelity (Figma)', 'Responsive Layout', 'Single Revision Cycle', 'Source Assets Included'] },
+                { tier: 'Standard Tier', price: '800K', unit: '/ PKG', items: ['03-05 Core Interfaces', 'Wireframe + High Fidelity', 'Foundational Style Guide', 'Dual Revision Cycles'], recommended: true },
+                { tier: 'Advanced Tier', price: '1.5M', unit: '/ PKG', items: ['05+ Complex Views', 'Design System Core', 'Clickable Prototype', 'Multi-Cycle Revisions'] }
+              ]" :key="idx" 
+              class="border-r border-b border-white/5 p-10 hover:bg-white transition-all duration-700 group relative overflow-hidden" 
+              data-aos="fade-up" :data-aos-delay="idx*100">
+                
+                <div v-if="pkg.recommended" class="absolute top-4 right-4 text-[8px] font-black uppercase tracking-widest text-white group-hover:text-black opacity-20 group-hover:opacity-100 italic">[ RECOMMENDED_NODE ]</div>
+                
+                <h3 class="text-xs font-black text-zinc-500 group-hover:text-black uppercase tracking-[0.3em] mb-2">{{ pkg.tier }}</h3>
+                <div class="text-2xl font-black text-white group-hover:text-black tracking-tighter mb-10 italic">
+                  IDR {{ pkg.price }} <span class="text-[10px] font-normal tracking-widest">{{ pkg.unit }}</span>
+                </div>
+                
+                <ul class="space-y-4 text-[11px] uppercase tracking-widest text-zinc-500 group-hover:text-black">
+                  <li v-for="item in pkg.items" :key="item">— {{ item }}</li>
                 </ul>
-                <RouterLink to="#kontak" class="inline-block w-full text-center py-4 border border-white/10 group-hover:border-black text-[10px] font-black uppercase tracking-[0.3em] text-white group-hover:text-black hover:bg-black hover:text-white transition-all italic">Initiate Request</RouterLink>
-              </div>
-
-              <div class="border-r border-b border-white/5 p-10 bg-zinc-950 hover:bg-white transition-all duration-700 group relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                <div class="absolute top-4 right-4 text-[8px] font-black uppercase tracking-widest text-white group-hover:text-black opacity-20 group-hover:opacity-100 italic">[ RECOMMENDED_NODE ]</div>
-                <h3 class="text-xs font-black text-zinc-500 group-hover:text-black uppercase tracking-[0.3em] mb-2">Standard Tier</h3>
-                <div class="text-2xl font-black text-white group-hover:text-black tracking-tighter mb-8 italic">IDR 800K <span class="text-[10px] font-normal tracking-widest">/ PKG</span></div>
-                <ul class="space-y-4 mb-12 text-[11px] uppercase tracking-widest text-zinc-500 group-hover:text-black">
-                  <li>— 03-05 Core Interfaces</li>
-                  <li>— Wireframe + High Fidelity</li>
-                  <li>— Foundational Style Guide</li>
-                  <li>— Dual Revision Cycles</li>
-                </ul>
-                <RouterLink to="#kontak" class="inline-block w-full text-center py-4 bg-white text-black group-hover:bg-black group-hover:text-white text-[10px] font-black uppercase tracking-[0.3em] transition-all italic">Initiate Request</RouterLink>
-              </div>
-
-              <div class="border-r border-b border-white/5 p-10 hover:bg-white transition-all duration-700 group" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="text-xs font-black text-zinc-500 group-hover:text-black uppercase tracking-[0.3em] mb-2">Advanced Tier</h3>
-                <div class="text-2xl font-black text-white group-hover:text-black tracking-tighter mb-8 italic">IDR 1.5M <span class="text-[10px] font-normal tracking-widest">/ PKG</span></div>
-                <ul class="space-y-4 mb-12 text-[11px] uppercase tracking-widest text-zinc-500 group-hover:text-black">
-                  <li>— 05+ Complex Views</li>
-                  <li>— Design System Core</li>
-                  <li>— Clickable Prototype</li>
-                  <li>— Multi-Cycle Revisions</li>
-                </ul>
-                <RouterLink to="#kontak" class="inline-block w-full text-center py-4 border border-white/10 group-hover:border-black text-[10px] font-black uppercase tracking-[0.3em] text-white group-hover:text-black hover:bg-black hover:text-white transition-all italic">Initiate Request</RouterLink>
               </div>
             </div>
           </div>
@@ -121,30 +104,10 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 border-l border-t border-white/5">
               <div v-for="(pkg, idx) in [
-                { 
-                  name: 'E-Commerce', 
-                  tagline: 'Retail Logic System', 
-                  price: '4.5M', 
-                  specs: ['Product Management', 'Cart & Checkout', 'Admin Control Panel', 'Payment Gateway Integration'] 
-                },
-                { 
-                  name: 'Online Course', 
-                  tagline: 'LMS Infrastructure', 
-                  price: '6.0M', 
-                  specs: ['User Auth System', 'Content Upload Engine', 'Student Dashboard', 'Role-Based Access'] 
-                },
-                { 
-                  name: 'Membership', 
-                  tagline: 'Gated Content Node', 
-                  price: '6.0M', 
-                  specs: ['Secure Login System', 'Content Restriction', 'Subscription Logic', 'Member Dashboard'] 
-                },
-                { 
-                  name: 'Custom System', 
-                  tagline: 'Tailored Architecture', 
-                  price: '7.0M', 
-                  specs: ['Custom DB Schema', 'Complex Business Logic', 'Integrated Dashboard', 'Tech Documentation'] 
-                }
+                { name: 'E-Commerce', tagline: 'Retail Logic System', price: '4.5M', specs: ['Product Management', 'Cart & Checkout', 'Admin Control Panel', 'Payment Gateway Integration'] },
+                { name: 'Online Course', tagline: 'LMS Infrastructure', price: '6.0M', specs: ['User Auth System', 'Content Upload Engine', 'Student Dashboard', 'Role-Based Access'] },
+                { name: 'Membership', tagline: 'Gated Content Node', price: '6.0M', specs: ['Secure Login System', 'Content Restriction', 'Subscription Logic', 'Member Dashboard'] },
+                { name: 'Custom System', tagline: 'Tailored Architecture', price: '7.0M', specs: ['Custom DB Schema', 'Complex Business Logic', 'Integrated Dashboard', 'Tech Documentation'] }
               ]" :key="idx" class="group p-8 border-r border-b border-white/5 hover:bg-white transition-all duration-700 relative" data-aos="fade-up" :data-aos-delay="idx*100">
                 
                 <div class="flex justify-between items-start mb-12">
@@ -155,22 +118,14 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
                 <h3 class="text-lg font-black text-white group-hover:text-black uppercase tracking-tighter mb-1">{{ pkg.name }}</h3>
                 <p class="text-[9px] text-zinc-600 group-hover:text-black/60 uppercase tracking-widest mb-6 italic">{{ pkg.tagline }}</p>
                 
-                <div class="text-xl font-black text-white group-hover:text-black tracking-tighter mb-8 italic">
-                  FROM {{ pkg.price }}
-                </div>
-
+                <div class="text-xl font-black text-white group-hover:text-black tracking-tighter mb-8 italic">FROM {{ pkg.price }}</div>
                 <div class="h-[1px] w-8 bg-white/20 group-hover:bg-black/20 mb-8 transition-all group-hover:w-full"></div>
 
-                <ul class="space-y-3 mb-10">
+                <ul class="space-y-3 mb-4">
                   <li v-for="spec in pkg.specs" :key="spec" class="text-[10px] uppercase tracking-wider text-zinc-500 group-hover:text-black flex items-start gap-2">
-                    <span class="opacity-30 group-hover:opacity-100">//</span>
-                    {{ spec }}
+                    <span class="opacity-30 group-hover:opacity-100">//</span> {{ spec }}
                   </li>
                 </ul>
-
-                <RouterLink to="#kontak" class="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-700 group-hover:text-black border-b border-zinc-900 group-hover:border-black pb-1 hover:italic transition-all">
-                  Build System —>
-                </RouterLink>
               </div>
             </div>
           </div>
@@ -203,15 +158,34 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
               </div>
             </div>
           </div>
-          
 
-          <div class="relative py-24 px-12 border border-white/10 bg-zinc-950 overflow-hidden group text-center" data-aos="zoom-in">
-            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.02] transition-opacity"></div>
-            <h2 class="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter">SPECIFIC <span class="text-transparent text-outline-white italic">REQUIREMENTS?</span></h2>
-            <p class="text-zinc-500 mb-12 max-w-xl mx-auto text-[11px] uppercase tracking-[0.3em]">Diskusikan parameter proyek Anda dengan tim teknis kami. Konsultasi awal 100% gratis.</p>
-            <RouterLink to="#kontak" class="inline-flex items-center px-16 py-5 bg-white text-black text-[11px] font-black uppercase tracking-[0.5em] hover:invert transition-all active:scale-95 italic">
-              INITIALIZE CONSULTATION —>
-            </RouterLink>
+          <div class="relative py-32 px-12 border border-white/10 bg-zinc-950 overflow-hidden group text-center" data-aos="zoom-in">
+            <div class="absolute inset-0 bg-white opacity-[0.01] group-hover:opacity-[0.03] transition-opacity duration-700"></div>
+            
+            <div class="relative z-10">
+              <div class="flex justify-center mb-10">
+                <div class="w-12 h-[1px] bg-zinc-800 group-hover:w-24 group-hover:bg-white transition-all duration-700"></div>
+              </div>
+              
+              <h2 class="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
+                READY TO <br class="md:hidden" />
+                <span class="text-transparent text-outline-white italic">BUILD?</span>
+              </h2>
+              
+              <p class="text-zinc-500 mb-16 max-w-xl mx-auto text-[11px] uppercase tracking-[0.4em] leading-relaxed">
+                Diskusikan parameter proyek Anda dengan tim teknis kami. <br />
+                Konsultasi awal 100% bebas biaya komitmen.
+              </p>
+              
+              <RouterLink :to="{ path: '/', hash: '#kontak' }" 
+                class="inline-flex items-center px-16 py-6 bg-white text-black text-[11px] font-black uppercase tracking-[0.5em] hover:bg-zinc-200 transition-all active:scale-95 italic shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                INITIALIZE CONSULTATION —>
+              </RouterLink>
+              
+              <div class="mt-16 text-[8px] font-mono text-zinc-800 uppercase tracking-widest">
+                [ Protocol: Direct_Inquiry // Status: Online ]
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -224,16 +198,19 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
 }
 
-/* Custom table adjustments */
 table {
   border-collapse: collapse;
 }
 
-/* Scrollbar adjustment for unitary services table */
 .overflow-x-auto::-webkit-scrollbar {
   height: 4px;
 }
 .overflow-x-auto::-webkit-scrollbar-thumb {
   background: #222;
+}
+
+/* Biar scroll smooth saat klik link dengan hash */
+html {
+  scroll-behavior: smooth;
 }
 </style>

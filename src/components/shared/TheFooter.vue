@@ -5,12 +5,11 @@
       <div class="grid md:grid-cols-12 gap-12 text-zinc-500">
 
         <div class="md:col-span-4">
-          <div class="flex items-center group mb-6">
-            <div class="w-6 h-6 bg-white flex items-center justify-center rotate-45 group-hover:bg-zinc-300 transition-colors">
-               <div class="-rotate-45 text-black font-black text-[10px]">C</div>
-            </div>
-            <span class="text-xl font-black tracking-[0.3em] text-white ml-3 italic">CONCERN</span>
-          </div>
+          <RouterLink to="/" class="flex-1 flex items-center group"> 
+            <span class="text-2xl font-black tracking-[0.1em] text-white ml-  uppercase transition-all duration-500">
+              CONCERN
+            </span>
+          </RouterLink>
           <p class="text-[13px] leading-relaxed mb-6 max-w-sm uppercase tracking-wider leading-6">
             Software house based in Yogyakarta. Delivering 
             <span class="text-white">modern digital solutions</span> with surgical precision and high-scalability.

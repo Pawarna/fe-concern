@@ -4,13 +4,19 @@
   >
     <nav class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
       
-      <RouterLink to="/" class="flex-1 flex items-center group">
-        <div class="relative w-7 h-7 bg-white flex items-center justify-center rotate-45 group-hover:bg-zinc-200 transition-colors duration-500">
-           <div class="-rotate-45 text-black font-black text-xs">C</div>
-        </div>
-        <span class="text-lg font-black tracking-[0.2em] text-white ml-3">CONCERN</span>
-      </RouterLink>
-
+<RouterLink to="/" class="flex-1 flex items-center group">
+  <div class="relative w-12 h-12 flex items-center justify-center overflow-visible">
+    <img 
+      src="@/assets/images/logo2.png" 
+      alt="Concern Logo" 
+      class="w-full h-full object-contain transition-transform duration-1000 ease-in-out group-hover:rotate-720 group-hover:scale-110"
+    />
+  </div>
+  
+  <span class="text-2xl font-black tracking-[0.1em] text-white ml-3  uppercase transition-all duration-500">
+    CONCERN
+  </span>
+</RouterLink>
       <div class="hidden md:flex flex-[2] justify-center items-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400">
         <RouterLink to="#about" class="hover:text-white transition-colors">About</RouterLink>
         
@@ -24,11 +30,12 @@
 
           <div class="absolute top-[100%] left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
             <div class="bg-black border border-white/10 w-48 p-2 shadow-[0_10px_30px_-10px_rgba(255,255,255,0.1)] backdrop-blur-2xl">
-              <RouterLink to="#web" class="block px-4 py-3 hover:bg-white hover:text-black transition-colors">Web Systems</RouterLink>
-              <RouterLink to="#ai" class="block px-4 py-3 hover:bg-white hover:text-black transition-colors">AI Solutions</RouterLink>
-              <RouterLink to="#design" class="block px-4 py-3 hover:bg-white hover:text-black transition-colors">Tech Design</RouterLink>
+              <RouterLink to="#services" class="block px-4 py-3 hover:bg-white hover:text-black transition-colors">Web app</RouterLink>
+              <RouterLink to="#services" class="block px-4 py-3 hover:bg-white hover:text-black transition-colors">Frontend Dev</RouterLink>
+              <RouterLink to="#services" class="block px-4 py-3 hover:bg-white hover:text-black transition-colors">Backend Dev</RouterLink>
+              <RouterLink to="#services" class="block px-4 py-3 hover:bg-white hover:text-black transition-colors">IT consultant</RouterLink>
               <div class="border-t border-white/5 my-1"></div>
-              <RouterLink to="#consulting" class="block px-4 py-3 hover:bg-white hover:text-black transition-colors italic">All Services</RouterLink>
+              <RouterLink to="/services" class="block px-4 py-3 hover:bg-white hover:text-black transition-colors italic">All Services</RouterLink>
             </div>
           </div>
         </div>
@@ -37,7 +44,7 @@
         <RouterLink :to="{ path: '/', hash: '#news' }" class="block hover:text-white transition">
         News
       </RouterLink>
-        <RouterLink to="#portfolio" class="hover:text-white transition-colors">Portfolio</RouterLink>
+        <RouterLink to="#portfolio" class="hover:text-white transition-colors">Portofolio</RouterLink>
       </div>
 
       <div class="flex-1 flex justify-end">

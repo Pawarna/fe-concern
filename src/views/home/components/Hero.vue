@@ -25,7 +25,7 @@
         data-aos="fade-down"
       >
         <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500 italic"
-          >Core System v2.0</span
+          >Core System</span
         >
       </div>
 

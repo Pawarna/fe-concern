@@ -84,12 +84,19 @@ onBeforeUnmount(() => { editor.value?.destroy() })
   <div class="min-h-screen bg-black text-zinc-300 font-sans selection:bg-white selection:text-black">
     <nav class="border-b border-white/5 bg-black/80 backdrop-blur-xl sticky top-0 z-40">
       <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-        <router-link to="/" class="flex items-center group">
-          <div class="w-6 h-6 bg-white rotate-45 flex items-center justify-center transition-transform group-hover:rotate-180">
-            <span class="text-black font-black text-[10px] -rotate-45 group-hover:-rotate-180 transition-transform">C</span>
+        <RouterLink to="/" class="flex-1 flex items-center group">
+          <div class="relative w-12 h-12 flex items-center justify-center overflow-visible">
+            <img 
+              src="@/assets/images/logo2.png" 
+              alt="Concern Logo" 
+              class="w-full h-full object-contain transition-transform duration-1000 ease-in-out group-hover:rotate-720 group-hover:scale-110"
+            />
           </div>
-          <span class="ml-3 text-xs font-black uppercase tracking-[0.3em] text-white">Concern.</span>
-        </router-link>
+          
+          <span class="text-1xl font-black tracking-[0.1em] text-white ml-3  uppercase transition-all duration-500">
+            CONCERN
+          </span>
+        </RouterLink>
         <router-link to="/" class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition">
           [ BACK_TO_BASE ]
         </router-link>
